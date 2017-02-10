@@ -251,7 +251,7 @@ ActiveSupport::TimeZone.find_tzinfo(Rails.configuration.time_zone).name
 ```
 
 ## Sidekiq Web Integration
-
+### With Sidekiq
 sidekiq-scheduler provides an extension to the Sidekiq web interface that adds a `Recurring Jobs` page.
 
 ``` ruby
@@ -266,6 +266,17 @@ app = Rack::Builder.new {
 }.to_app
 
 Rack::Handler::WEBrick.run app
+```
+### With Sidekiq on Rails
+```ruby
+# config/routes.rb
+require 'sidekiq/web'
+require 'sidekiq-scheduler'
+require 'sidekiq-scheduler/web'
+
+# more options and details at https://github.com/mperham/sidekiq/wiki/Monitoring
+mount Sidekiq::Web => '/sidekiq'
+
 ```
 
 ## The Spring preloader and Testing your initializer via Rails console
